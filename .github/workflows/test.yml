@@ -16,7 +16,7 @@ jobs:
           persist-credentials: false
 
       - name: "Docker"
-        run: docker run -v /root/.near -p 3030:3030 --name nearup nearprotocol/nearup run localnet
+        run: docker run -v /root/.near -p 3030:3030 -d --name nearup nearprotocol/nearup run localnet
 
       - name: Testing
-        run: echo "testing"
+        run: curl http://127.0.0.1:3030/status
