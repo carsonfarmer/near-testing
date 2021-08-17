@@ -18,5 +18,9 @@ jobs:
       - name: "Docker"
         run: docker run -v /root/.near -p 3030:3030 -d --name nearup nearprotocol/nearup run localnet
 
+      - name: Sleep for 10 seconds
+        run: sleep 10s
+        shell: bash
+
       - name: Testing
         run: curl http://127.0.0.1:3030/status
