@@ -9,25 +9,14 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
-    services:
-      nearup:
-        image: nearprotocol/nearup
-        command: run localnet --verbose
-        init: true
-        ports:
-          - "127.0.0.1:3030:3030" # near rpc
-        healthcheck:
-          test: curl -f http://127.0.0.1:3030/status
-          interval: 30s
-          timeout: 20s
-          retries: 3
-
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v2.3.1
         with:
           persist-credentials: false
+
+      - name: "Docker"
+        run: docker run -v /root/.near -p 3030:3030 --name nearup nearprotocol/nearup run localnet
 
       - name: Testing
         run: echo "testing"
